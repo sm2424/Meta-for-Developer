@@ -1,0 +1,333 @@
+{
+    "version": "3.1",
+    "data_api_version": "3.0",
+    "routing_model": {
+      "SELECT_LANGUAGE": [
+        "EVENT_PERSON",
+        "DETAILS_OF_PERSON_ONE"
+      ],
+      "EVENT_PERSON": [
+        "DETAILS_OF_PERSON_TWO"
+      ],
+      "DETAILS_OF_PERSON_ONE": [],
+      "DETAILS_OF_PERSON_TWO": []
+    },
+    "screens": [
+      {
+        "id": "SELECT_LANGUAGE",
+        "title": "Select Language",
+        "terminal": true,
+        "success": true,
+        "data": {},
+        "layout": {
+          "type": "SingleColumnLayout",
+          "children": [
+            {
+              "type": "Form",
+              "name": "SELECT_LANGUAGE_form",
+              "children": [
+                
+                {
+                  "type": "RadioButtonsGroup",
+                  "required": true,
+                  "label": "Choose One",
+                  "name": "language_radio",
+                  "data-source":[
+                    {
+                      "id": "0",
+                      "title": "English"
+                    },
+                    {
+                      "id": "1",
+                      "title": "Gujarati"
+                    }
+                  ]
+                  
+                },
+                             
+                
+                {
+                  "type": "Footer",
+                  "label": "Continue",
+                  "on-click-action": {
+                    "name": "data_exchange",
+                    "payload": {
+                      "language_radio": "${form.language_radio}"
+                      
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "EVENT_PERSON",
+        "title": "Event Person",
+        "data": {},
+        "layout": {
+          "type": "SingleColumnLayout",
+          "children": [
+            {
+              "type": "Form",
+              "name": "EVENT_PERSON_form",
+              "children": [
+                {
+                  "type": "TextSubheading",
+                  "text": "How many person will come for event?"
+                },
+                {
+                  "type": "RadioButtonsGroup",
+                  "required": true,
+                  "label": "Choose One",
+                  "name": "person_radio",
+                  "data-source":[
+                    {
+                      "id": "0",
+                      "title": "1"
+                    },
+                    {
+                      "id": "1",
+                      "title": "2"
+                    }
+                  ]
+                },
+                
+                {
+                  "type": "Dropdown",
+                  "label": "Event",
+                  "name": "event_name",
+                  "data-source": [
+                    {
+                      "id": "1",
+                      "title": "AWS"
+                    },
+                    {
+                      "id": "2",
+                      "title": "TERRAFORM"
+                    },
+                    {
+                      "id": "3",
+                      "title": "ANSIBLE"
+                    },
+                    {
+                      "id": "4",
+                      "title": "KUBERNETES"
+                    },
+                    {
+                      "id": "5",
+                      "title": "Other"
+                    }
+                  ],
+                  "required": false
+                },
+                
+  
+                
+                
+                {
+                  "type": "Footer",
+                  "label": "Continue",
+                  "on-click-action": {
+                    "name": "data_exchange",
+                    "payload": {
+                      "event_name": "${form.event_name}"                                       
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "DETAILS_OF_PERSON_ONE",
+        "title": "Details of person one",
+        "data": {
+          "city": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                }
+              }
+            },
+            "__example__": [
+              {
+                "id": "1",
+                "title": "Light City, SO"
+              }
+            ]
+          }
+        },
+        "layout": {
+          "type": "SingleColumnLayout",
+          "children": [
+            {
+              "type": "Form",
+              "name": "details_form",
+              "children": [
+                {
+                  "type": "TextInput",
+                  "label": "Your name",
+                  "input-type": "text",
+                  "name": "nameOne",
+                  "required": true
+                },
+                {
+                  "type": "TextInput",
+                  "label": "Street address",
+                  "input-type": "text",
+                  "name": "addressOne",
+                  "required": true
+                },
+                {
+                  "type": "Dropdown",
+                  "label": "City, State",
+                  "name": "city",
+                  "data-source": "${data.city}",
+                  "required": true
+                },
+                {
+                  "type": "TextInput",
+                  "label": "Zip code",
+                  "input-type": "text",
+                  "name": "zip_code",
+                  "required": true
+                },
+                {
+                  "type": "TextInput",
+                  "label": "Country/Region",
+                  "input-type": "text",
+                  "name": "country_region",
+                  "required": true
+                },  
+                {
+                  "type": "TextInput",
+                  "label": "Mobile number",
+                  "name": "mobileNumberOne",
+                  "input-type": "number",
+                  "required": true
+                },
+                {
+                  "type": "Footer",
+                  "label": "Continue",
+                  "on-click-action": {
+                    "name": "data_exchange",
+                    "payload": {
+                      "nameOne": "${form.nameOne}",
+                      "addressOne": "${form.addressOne}",
+                      "city": "${form.city}",
+                      "zip_code": "${form.zip_code}",
+                      "country_region": "${form.country_region}",
+                          "mobileNumberOne":"$(form.mobileNumberOne)"
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "DETAILS_OF_PERSON_TWO",
+        "title": "Details of person two",
+        "data": {
+          "city": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                }
+              }
+            },
+            "__example__": [
+              {
+                "id": "1",
+                "title": "Light City, SO"
+              }
+            ]
+          }
+        },
+        "layout": {
+          "type": "SingleColumnLayout",
+          "children": [
+            {
+              "type": "Form",
+              "name": "details_form",
+              "children": [
+                {
+                  "type": "TextInput",
+                  "label": "Your name",
+                  "input-type": "text",
+                  "name": "nameTwo",
+                  "required": true
+                },
+                {
+                  "type": "TextInput",
+                  "label": "Street address",
+                  "input-type": "text",
+                  "name": "addressTwo",
+                  "required": true
+                },
+                {
+                  "type": "Dropdown",
+                  "label": "City, State",
+                  "name": "city",
+                  "data-source": "${data.city}",
+                  "required": true
+                },
+                {
+                  "type": "TextInput",
+                  "label": "Zip code",
+                  "input-type": "text",
+                  "name": "zip_code",
+                  "required": true
+                },
+                {
+                  "type": "TextInput",
+                  "label": "Country/Region",
+                  "input-type": "text",
+                  "name": "country_region",
+                  "required": true
+                },  
+                {
+                  "type": "TextInput",
+                  "label": "Mobile number",
+                  "name": "mobileNumberTwo",
+                  "input-type": "number",
+                  "required": true
+                },
+                {
+                  "type": "Footer",
+                  "label": "Continue",
+                  "on-click-action": {
+                    "name": "data_exchange",
+                    "payload": {
+                      "nameTwo": "${form.nameTwo}",
+                      "addressTwo": "${form.addressTwo}",
+                      "city": "${form.city}",
+                      "zip_code": "${form.zip_code}",
+                      "country_region": "${form.country_region}",
+                          "mobileNumberTwo":"$(form.mobileNumberTwo)"
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      }    
+    ]
+  }
